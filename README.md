@@ -1,8 +1,3 @@
-![](cow.png)
-
-Moo!
-====
-
 Moo is a highly-optimised tokenizer/lexer generator. Use it to tokenize your strings, before parsing 'em with a parser like [nearley](https://github.com/hardmath123/nearley) or whatever else you're into.
 
 * [Fast](#is-it-fast)
