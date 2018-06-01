@@ -1,12 +1,12 @@
 {
-  "name": "moo",
+  "name": "kreia-moo",
   "version": "0.4.3",
-  "description": "Optimised tokenizer/lexer generator! 🐄 Much performance. Moo!",
+  "description": "An extended version of moo with features needed by the Kreia parser engine.",
   "main": "moo.js",
   "files": [
     "moo.js"
   ],
-  "repository": "https://github.com/tjvr/moo.git",
+  "repository": "https://github.com/blainehansen/moo.git",
   "author": "Tim Radvan <tim@tjvr.org>",
   "contributors": [
     "Nathan"
