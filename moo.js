@@ -546,14 +546,18 @@
   Lexer.prototype.formatError = function(token, message) {
     var value = token.value
     var index = token.offset
-    var eol = token.lineBreaks ? value.indexOf('\n') : value.length
+    var endOfLine = token.lineBreaks ? value.indexOf('\n') : value.length
     var start = Math.max(0, index - token.col + 1)
-    var firstLine = this.buffer.substring(start, index + eol)
+    var firstLine = this.buffer.substring(start, index + endOfLine)
     message += " at line " + token.line + " col " + token.col + ":\n\n"
     message += "  " + firstLine + "\n"
     message += "  " + Array(token.col).join(" ") + "^"
     return message
   }
+
+  // Lexer.prototype.formatRangeError = function(beginToken, endToken, message) {
+  //   const startIndex = beginToken.offset
+  // }
 
   Lexer.prototype.clone = function() {
     return new Lexer(this.states, this.state)
