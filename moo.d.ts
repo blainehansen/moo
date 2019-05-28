@@ -1,4 +1,3 @@
-// declare module 'moo';
 export as namespace moo;
 
 /**
@@ -9,15 +8,27 @@ export const error: { error: true };
 /**
  * Reserved token for indicating a fallback rule.
  */
-export const fallback: { fallback: true };
 
-export type TypeMapper = (x: string) => string;
+export type Category = {
+	isCategory: boolean,
+	categoryName: string,
+	categories: Category[] | null,
+}
 
-export function keywords(kws: {[k: string]: string | string[]}): TypeMapper;
+export interface TokenDefinition {
+	type: string,
+	categories: Category[] | null,
+}
 
 export function compile(rules: Rules): Lexer;
 
 export function states(states: {[x: string]: Rules}, start?: string): Lexer;
+
+export type TokenOrCategory = TokenDefinition | Category;
+export function matchToken(testToken: Token, matchTokenOrCategory: TokenOrCategory);
+export function matchTokens(testTokens: Token[], matchTokensOrCategories: TokenOrCategory[]);
+export function createCategory(categoryName: string, parentCategories?: Category | Category[]);
+
 
 export interface Rule {
 	match?: RegExp | string | string[];
@@ -49,12 +60,17 @@ export interface Rule {
 	 */
 	value?: (x: string) => string;
 
-	/**
-	 * Used for mapping one set of types to another.
-	 * See https://github.com/no-context/moo#keywords for an example
-	 */
-	type?: TypeMapper;
+	categories?: Category | Category[];
+
+	ignore?: true;
+
+	keywords?: {
+		[keywordType: string]: string | string[] | {
+			values: string | string[], categories: Category | Category[],
+		} 
+	};
 }
+
 export interface Rules {
 	[x: string]: RegExp | string | string[] | Rule | Rule[];
 }
@@ -82,6 +98,8 @@ export interface Lexer {
 	 * to reset() to explicitly control the internal state of the lexer.
 	 */
 	save(): LexerState;
+
+	tokenLibrary(): { [tokenType: string]: TokenDefinition };
 
 	[Symbol.iterator](): Iterator<Token>;
 }
@@ -119,6 +137,9 @@ export interface Token {
 	 * The column where the match begins, starting from 1.
 	 */
 	col: number;
+
+	// categories
+	categories: Category[] | null,
 }
 
 export interface LexerState {
