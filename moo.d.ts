@@ -25,9 +25,9 @@ export function compile(rules: Rules): Lexer;
 export function states(states: {[x: string]: Rules}, start?: string): Lexer;
 
 export type TokenOrCategory = TokenDefinition | Category;
-export function matchToken(testToken: Token, matchTokenOrCategory: TokenOrCategory);
-export function matchTokens(testTokens: Token[], matchTokensOrCategories: TokenOrCategory[]);
-export function createCategory(categoryName: string, parentCategories?: Category | Category[]);
+export function matchToken(testToken: Token, matchTokenOrCategory: TokenOrCategory): boolean;
+export function matchTokens(testTokens: Token[], matchTokensOrCategories: TokenOrCategory[]): boolean;
+export function createCategory(categoryName: string, parentCategories?: Category | Category[]): Category;
 
 
 export interface Rule {
