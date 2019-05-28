@@ -1,6 +1,6 @@
 {
   "name": "kreia-moo",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "An extended version of moo with features needed by the Kreia parser engine.",
   "main": "moo.js",
   "types": "moo.d.ts",
