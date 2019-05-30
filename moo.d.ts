@@ -17,7 +17,7 @@ export type Category = {
 
 export interface TokenDefinition {
 	type: string,
-	categories: Category[] | null,
+	categories: string[] | null,
 }
 
 export function compile(rules: Rules): Lexer;
@@ -139,7 +139,7 @@ export interface Token {
 	col: number;
 
 	// categories
-	categories: Category[] | null,
+	categories: string[] | null,
 }
 
 export interface LexerState {
